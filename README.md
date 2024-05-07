@@ -93,8 +93,8 @@ nano /etc/bind/named.conf.local
 * Menambahkan konfigurasi penambahan zone berikut ke dalam file named.conf.local. Zone yang ditambahkan merupakan reverse dari 3 byte awal dari IP Pochinki yaitu 10.78.1.2 menjadi 1.78.10
 ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/5913bc48-4ca1-4c33-91f3-9f1414ba900e)
 * Mengcopy file db.local pada path /etc/bind ke dalam folder jarkom yang baru saja dibuat dengan nama "1.78.10.in-addr.arpa" dan mengeditnya dengan konfigurasi berikut
-![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/b995ae48-c2e2-47e1-8c19-0f3b42c7db98)
-angka 2 di bawah baris 1.78.10.in-addr.arpa merupakan byte ke 4 dari IP Pochinki dan pada konfigurasi domain yang disesuaikan yaitu redzone.it29.com.
+![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/b995ae48-c2e2-47e1-8c19-0f3b42c7db98)<br>
+angka 2 di bawah baris 1.78.10.in-addr.arpa merupakan byte ke 4 dari IP Pochinki dan pada konfigurasi domain yang disesuaikan yaitu redzone.it29.com.<br>
 ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/763e730f-ec04-4e3e-8791-4bd10295d28a)
 
 **7. Membuat DNS Slave Georgopol untuk semua domain yang telah dibuat**<br>
