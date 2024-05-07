@@ -125,6 +125,40 @@ Untuk membuat subdomain, kita dapat mengonfigurasi zone yang telah dibuat, dalam
 Berikut adalah bukti testing nya : 
 ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/9045db2b-b8cb-4d42-b39b-8a8ca2612c24)
 
+**9. Membuat subdomain siren.redzone.it29.com dan mendelegasikannya ke Georgopol**<br>
+1. Konfigurasi Pada Pochinki
+   * Pada file /etc/bind/jarkom/redzone.it29.com
+   ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/bdbc6ecc-d482-4a6d-be87-b9263071f72b)
+   * Kemudian edit file /etc/bind/named.conf.options menjaadi seperti ini
+   ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/73443613-1637-42a5-b730-e28027ad6506)
+   * Lalu edit file /etc/bind/named.conf.local menjadi seperti gambar di bawah
+   ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/c3930819-9986-44ae-b6f7-54d411919db8)<br>
+
+2. Konfigurasi pada Georgopol
+   * Edit file /etc/bind/named.conf.options menjaadi seperti ini
+     ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/73443613-1637-42a5-b730-e28027ad6506)
+   * Menambahkan zone untuk subdomain pada named.conf.local
+     ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/6e95697a-6c7a-4631-a27f-9f04728b575d)
+   * Kemudian membuat direktori delegasi yang didalamnya terdapat copy db.local untuk siren.redzone.it29.com dan konfigurasikan seperti berikut : 
+     ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/d248cdfc-a03d-4145-b185-9126a24df325)
+   * Berikut dokumentasi ping oleh client terhadap subdomain yang didelegasikan
+     ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/ff808b57-a400-4e63-98f2-0cacebc5e8dd)
+     ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/ef4ca570-9df5-4642-9478-e8b31592005e)
+
+**10. Membuat subdomain log di dalam subdomain siren.redzone.it29.com**<br>
+1. Mengedit named.conf.local dengan menambahkan zone baru untuk log.siren.redzone.it29.com seperti berikut :
+   ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/fc8b773e-f960-4fa2-9445-a6c8f6bbb695)
+2. Copy db.local untuk log.siren.redzone.it29.com dan konfigurasikan seperti berikut
+   ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/71fe7fdd-b34a-4cb1-a046-edec6b432496)
+3. Dokumentasi ping ke log.siren.redzone.it29.com
+   ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/afaa4e64-d9d2-4038-8c33-09302d058c0b)
+   ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/102070c8-46d2-488d-b507-19e733059d50)
+
+
+   
+
+
+
 
 
 
