@@ -66,7 +66,7 @@ ping airdrop.it29.com -c 5
 
 Tes apakah DNS bisa diakses klien
 
-**5. Memastikan Client dapat mengakses domain**
+**5. Memastikan Client dapat mengakses domain**<br>
 setelah membuat domain untuk setiap server(airdrop.it29.com, redzone.it29.com, loot.it29.com), node client harus dikonfigurasi terlebih dahulu dengan cara menambahkan nameserver pada file resolv.conf yang ada di dalam direktori /etc agar client dapat mengakses domain yang telah dibuat.
 ```
  nano /etc/resolv.conf
@@ -83,7 +83,7 @@ nama domain dapat disesuaikan dengan ketiga domain ataupun dengan menggunakan al
 ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/8965c72b-5935-4a2a-98b2-6ceff1867a4f)
 ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/8e8aca7b-ce90-4ead-a03f-221e1dbe695c)
 
-**6. Memastikan client dapat mengakses domain redzone.it29.com melalui alamat IP Severny**
+**6. Memastikan client dapat mengakses domain redzone.it29.com melalui alamat IP Severny**<br>
 Agar client dapat mengakses domain redzone melalui IP Severny yang merupakan server dari domain redzone, perlu dilakukan konfigurasi  Reverse DNS atau Record PTR pada DNS Master(Pochinki) untuk menerjemahkan alamat IP Severny ke domain redzone yang sudah diterjemahkan sebelumnya.
 
 * Edit file /etc/bind/named.conf.local pada Pochinki
@@ -96,6 +96,34 @@ nano /etc/bind/named.conf.local
 ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/b995ae48-c2e2-47e1-8c19-0f3b42c7db98)
 angka 2 di bawah baris 1.78.10.in-addr.arpa merupakan byte ke 4 dari IP Pochinki dan pada konfigurasi domain yang disesuaikan yaitu redzone.it29.com.
 ![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/763e730f-ec04-4e3e-8791-4bd10295d28a)
+
+**7. Membuat DNS Slave Georgopol untuk semua domain yang telah dibuat**<br>
+Untuk DNS Slave, Georgopol akan dijadikan sebagai DNS slave dan Pochinki sebagai DNS masternya.
+1. Konfigurasi pada Pochinki
+* Mengedit zone domain pada file /etc/bind/named.conf.local menjadi seperti ini untuk setiap zone dari domain yang telah dibuat
+![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/643ae750-0e90-46b2-a51e-b7bd82195f77)
+IP yang dimasukkan pada zone domain merupakan IP Georgopol yang akan menjadi DNS Slave
+2. Konfigurasi pada Georgopol
+*  Mengedit zone domain pada file /etc/bind/named.conf.local menjadi seperti ini untuk setiap zone dari domain yang telah dibuat
+![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/5717f763-dfd6-4098-9e42-b66456242969)
+Jika tadi IP yang digunakan adalah IP Georgopol, maka pada zone domain Georgopol, IP yang digunakan adalah IP DNS Master yaitu Pochinki
+3. Testing
+Sebelum melakukan testing, pastikan merestart bind9 pada DNS Slave dan mematikan bind9 pada DNS Master 
+* Stop layanan bind9 DNS Master
+```
+service bind9 stop
+```
+Untuk testing apakah DNS Slave dapat digunakan, pastikan pengaturan nameserver mengarah ke IP Pochinki dan IP Georgopol pada setiap client.
+   ![Screenshot 2024-05-07 142946](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/8c63e2f7-538e-43b5-a837-6999c48d6cf4)
+Berikut adalah hasil testing oleh client terhadap DNS Slave
+![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/70b5696c-4029-4239-9460-6ebc63a600a6)
+
+**8. Membuat subdomain medkit.airdop.it29.com**<br>
+Untuk membuat subdomain, kita dapat mengonfigurasi zone yang telah dibuat, dalam hal ini adalah airdrop.it29.com.
+* Pada Pochinki, edit file /etc/bind/jarkom/airdrop.it29.com lalu tambahkan subdomain medkit untuk airdrop.it29.com yang mengarah ke IP Lipovka(10.78.3.4).
+![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/285fbe83-34c0-4dcf-9fc9-3e55680b4ab6)
+Berikut adalah bukti testing nya : 
+![image](https://github.com/J0see1/Jarkom-Modul-2-IT29/assets/143849730/9045db2b-b8cb-4d42-b39b-8a8ca2612c24)
 
 
 
